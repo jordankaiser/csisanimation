@@ -1,4 +1,5 @@
-h1 {
-  color: tomato;
-  font-family: cursive;
-}
+@layer reset, base;
+
+@import "css/reset.css" layer(reset);
+@import "css/base.css" layer(base);
+@import "css/hero.css" layer(base);

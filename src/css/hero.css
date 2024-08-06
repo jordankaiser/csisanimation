@@ -8,6 +8,7 @@
     padding-top: 3rem;
     padding-bottom: 3rem;
     margin-bottom: 3rem;
+    min-height: 3510px;
   }
 
   /* Background */
@@ -25,9 +26,8 @@
     width: 100%;
     top: 0;
     left: 0;
-    /* background-color: powderblue; */
 
-    img {
+    .hero__background__line {
       position: absolute;
       left: 0;
       top: 0;
@@ -37,37 +37,4 @@
       object-position: top right;
     }
   }
-
-  /* .hero__background__graphic {
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-  }
-
-  .hero__background__one {
-
-    img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      object-fit: contain;
-      object-position: 120px 87px;
-    }
-  }
-
-  .hero__background__three {
-
-    img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 312px;
-      height: 176px;
-      object-fit: contain;
-    }
-  } */
 }

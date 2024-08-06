@@ -6,6 +6,10 @@
     padding: 0;
     font-size: 100%;
   }
+
+  img {
+    max-width: 100%;
+  }
 }
 
 @layer base {
@@ -23,7 +27,7 @@
   }
 
   .container {
-    max-width: 1200px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1rem;
@@ -39,6 +43,7 @@
 
     & .hero__content {
       z-index: 1;
+      min-height: 3510px;
       margin-bottom: 3rem;
       padding-top: 3rem;
       padding-bottom: 3rem;
@@ -60,7 +65,7 @@
       top: 0;
       left: 0;
 
-      & img {
+      & .hero__background__line {
         object-fit: cover;
         object-position: top right;
         width: 100%;

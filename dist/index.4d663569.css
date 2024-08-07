@@ -66,8 +66,16 @@
       left: 0;
 
       & .hero__background__line {
-        object-fit: cover;
-        object-position: top right;
+        object-fit: contain;
+        object-position: left top;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      & .hero__background__line-svg {
         width: 100%;
         height: 100%;
         position: absolute;

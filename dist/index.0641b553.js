@@ -588,10 +588,6 @@ var _gsap = require("gsap");
 var _scrollTrigger = require("gsap/ScrollTrigger");
 var _motionPathPlugin = require("gsap/MotionPathPlugin");
 (0, _gsap.gsap).registerPlugin((0, _scrollTrigger.ScrollTrigger), (0, _motionPathPlugin.MotionPathPlugin));
-// console.log('scrollTrigger', ScrollTrigger);
-// console.log('motionPathPlugin', MotionPathPlugin);
-// console.log('gsap', gsap);
-// console.log('app.js is running!');
 (0, _gsap.gsap).to(".hero__background__one__circle", {
     scrollTrigger: {
         trigger: ".hero__background__one svg",

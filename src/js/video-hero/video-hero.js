@@ -1,15 +1,17 @@
 import { gsap } from 'gsap';
 import videojs from 'video.js';
+import 'video.js/dist/video-js.css';
 
-const videos = document.querySelectorAll('.hero__videos video');
+const videoElements = document.querySelectorAll('.hero__videos video');
+let videoPlayers = [];
 let videoAnimation;
 
-if (videos.length < 1) return;
+if (videoElements.length < 1) return;
 
 function videoHero() {
-  // createAnimation();
   attachListeners()
     .then(() => {
+      createAnimation();
       playAllVideos();
     })
     .catch((error) => {
@@ -18,8 +20,8 @@ function videoHero() {
 }
 
 function attachListeners() {
-  const videoPromises = Array.from(videos).map((video, key) => {
-    return eventListeners(video)
+  const videoPromises = Array.from(videoElements).map((videoElement, key) => {
+    return initializeVideoPlayer(videoElement, key)
       .then(() => {
         console.log(`Video ${key} loaded`);
       })
@@ -32,14 +34,22 @@ function attachListeners() {
   return Promise.all(videoPromises);
 }
 
-function eventListeners(video) {
+function initializeVideoPlayer(videoElement, key) {
   const abandonWait = 300000;
 
   return new Promise((resolve, reject) => {
-    console.log('promise');
+    // Initialize Video.js player
+    const player = videojs(videoElement, {
+      controls: false,
+      autoplay: false,
+      preload: 'auto'
+    });
+
+    videoPlayers.push(player);
+
     // Abandon loading if video does not load within specified duration.
     const canPlayAbandon = setTimeout(() => {
-      video.removeEventListener('canplay', canPlayHandler);
+      player.off('canplay', canPlayHandler);
 
       // Reject the promise.
       reject(new Error(`Video did not load within ${abandonWait} milliseconds. Aborting load attempt.`));
@@ -47,24 +57,25 @@ function eventListeners(video) {
 
     // Event handler.
     const canPlayHandler = () => {
-      console.log('Video loaded:', video.src);
+      console.log('Video loaded:', player.currentSrc());
       clearTimeout(canPlayAbandon);
-      video.removeEventListener('canplay', canPlayHandler);
+      player.off('canplay', canPlayHandler);
 
       // Resolve the promise.
       resolve();
     };
 
     // Event listener.
-    video.addEventListener('loadeddata', canPlayHandler);
+    player.on('canplay', canPlayHandler);
   });
 }
 
 function playAllVideos() {
-  videos.forEach((video) => {
-    video.play();
+  videoPlayers.forEach((player) => {
+    player.play();
   });
-  // videoAnimation.play();
+  // Uncomment if you have an animation to play
+  videoAnimation.play();
 }
 
 function createAnimation() {
@@ -80,7 +91,7 @@ function createAnimation() {
       {
         scale: 1,
         opacity: 1,
-        duration: 1,
+        duration: 0.75,
         ease: 'power2.out'
     });
 }
